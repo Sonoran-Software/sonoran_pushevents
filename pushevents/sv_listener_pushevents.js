@@ -20,7 +20,10 @@ let config = null;
 const listenPort = GetConvarInt('SonoranListenPort', 3232);
 var http = require('http');
 
-on('onServerResourceStart', () => {
+on('onServerResourceStart', (resource) => {
+    if (GetCurrentResourceName() != resource) {
+        return
+    }
     emit("SonoranCAD::core::getConfig");
 })
 
