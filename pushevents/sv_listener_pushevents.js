@@ -64,6 +64,26 @@ if (req.method == 'POST') {
                     response = 'Success!';
                 }
                 break;
+            case 'EVENT_UNIT_LOGIN':
+                if (!body.data.units) {
+                    response = 'Missing field: data.units';
+                } 
+               else {
+                    // All required fields are present
+                    emit('SonoranCAD::pushevents:UnitListUpdate', body.data.units);
+                    response = 'Success!';
+                }
+                break;
+            case 'EVENT_UNIT_LOGOUT':
+                if (!body.data.units) {
+                    response = 'Missing field: data.units';
+                } 
+               else {
+                    // All required fields are present
+                    emit('SonoranCAD::pushevents:UnitListUpdate', body.data.units);
+                    response = 'Success!';
+                }
+                break;
             default:
                 response = `Invalid API request type: ${body.type}`;
                 emit("SonoranCAD::core:writeLog", "debug", `Got an unknown type ${body.type}`);
