@@ -57,13 +57,38 @@ if (req.method == 'POST') {
                 if (!body.data.units) {
                     response = 'Missing field: data.units';
                 } 
-               else {
+                else {
                     // All required fields are present
                     for (unit of body.data.units) {
                         unit["type"] = "EVENT_UNIT_STATUS";
                         emit('SonoranCAD::pushevents:UnitUpdate', unit);
+                    }                
+                    response = 'Success!';
+                }
+                break;
+            case 'EVENT_UNIT_LOGIN':
+                if (!body.data.units) {
+                    response = 'Missing field: data.units';
+                } 
+                else {
+                    // All required fields are present
+                    for (unit of body.data.units) {
+                        unit["type"] = "EVENT_UNIT_LOGIN";
+                        emit('SonoranCAD::pushevents:UnitListUpdate', unit);
                     }
-                    
+                    response = 'Success!';
+                }
+                break;
+            case 'EVENT_UNIT_LOGOUT':
+                if (!body.data.units) {
+                    response = 'Missing field: data.units';
+                } 
+                else {
+                    // All required fields are present
+                    for (unit of body.data.units) {
+                        unit["type"] = "EVENT_UNIT_LOGOUT";
+                        emit('SonoranCAD::pushevents:UnitListUpdate', unit);
+                    }
                     response = 'Success!';
                 }
                 break;
