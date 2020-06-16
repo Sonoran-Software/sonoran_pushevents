@@ -32,7 +32,6 @@ on('onServerResourceStart', (resource) => {
 on("SonoranCAD::core:configData", function(data) {
     if (data != null) {
         config = JSON.parse(data);
-        emit("SonoranCAD::core:writeLog", "debug", "PushEvents is ready.");
     }
 });
 
@@ -88,6 +87,27 @@ if (req.method == 'POST') {
                     for (unit of body.data.units) {
                         unit["type"] = "EVENT_UNIT_LOGOUT";
                         emit('SonoranCAD::pushevents:UnitListUpdate', unit);
+                    }
+                    response = 'Success!';
+                }
+                break;
+            case 'EVENT_DISPATCH':
+                if (!body.data.dispatch) {
+                    response = 'Missing field: data.dispatch';
+                }
+                else {
+                    emit("SonoranCAD::pushevents:DispatchEvent", body.data);
+                    response = 'Success!';
+                }
+                break;
+            case 'EVENT_UNIT_CALL_CLEAR':
+                if (!body.data.units) {
+                    response = 'Missing field: data.units';
+                } 
+                else {
+                    for (unit of body.data.units) {
+                        unit["type"] = "EVENT_UNIT_CALL_CLEAR";
+                        emit('SonoranCAD::pushevents:DispatchClear', unit);
                     }
                     response = 'Success!';
                 }
