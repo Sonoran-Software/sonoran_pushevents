@@ -49,6 +49,7 @@ if (req.method == 'POST') {
         if (body.key && body.key.toUpperCase() === config.apiKey.toUpperCase()) {
         // Ensure TYPE exists
         if (body.type) {
+            emit("SonoranCAD::core:writeLog", "debug", JSON.stringify(body.data));
             // Check data fields per request type
             switch (body.type.toUpperCase()) {
             case 'EVENT_UNIT_STATUS':
@@ -120,12 +121,15 @@ if (req.method == 'POST') {
         {
             // TYPE field does not exist
             response = 'TYPE field not provided!';
+            emit("SonoranCAD::core:writeLog", "error", response);
         }
         } else {
         response = 'Invalid API Key!';
+        emit("SonoranCAD::core:writeLog", "error", response);
         }
     } catch (e) {
         response = `Invalid JSON syntax: ${e}`;
+        emit("SonoranCAD::core:writeLog", "error", response);
     }
     });
 } else {
