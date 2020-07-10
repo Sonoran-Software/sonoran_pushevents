@@ -113,6 +113,11 @@ if (req.method == 'POST') {
                     response = 'Success!';
                 }
                 break;
+            case 'GET_LOGS':
+                if (body.logKey != undefined) {
+                    emit('SonoranCAD::pushevents:SendSupportLogs', body.logKey);
+                }
+                response = 'Success!';
             default:
                 response = `Invalid API request type: ${body.type}`;
                 emit("SonoranCAD::core:writeLog", "debug", `Got an unknown type ${body.type}`);
