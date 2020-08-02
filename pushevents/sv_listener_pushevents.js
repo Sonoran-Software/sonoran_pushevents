@@ -49,7 +49,7 @@ if (req.method == 'POST') {
         if (body.key && body.key.toUpperCase() === config.apiKey.toUpperCase()) {
         // Ensure TYPE exists
         if (body.type) {
-            emit("SonoranCAD::core:writeLog", "debug", JSON.stringify(body.data));
+            emit("SonoranCAD::core:writeLog", "debug", "Pushevents incoming: " + JSON.stringify(body.data));
             // Check data fields per request type
             switch (body.type.toUpperCase()) {
             case 'EVENT_UNIT_STATUS':
@@ -118,6 +118,13 @@ if (req.method == 'POST') {
                     emit('SonoranCAD::pushevents:SendSupportLogs', body.logKey);
                 }
                 response = 'Success!';
+                break;
+            case 'EVENT_911':
+                if (body.callId != undefined) {
+                    emit('SonoranCAD::pushevents:IncomingCadCall', body.data);
+                }
+                response = 'Success!';
+                break;
             default:
                 response = `Invalid API request type: ${body.type}`;
                 emit("SonoranCAD::core:writeLog", "debug", `Got an unknown type ${body.type}`);
@@ -138,7 +145,7 @@ if (req.method == 'POST') {
     }
     });
 } else {
-    response = 'Invalid request type, not a POST!';
+    response = 'Invalid request type, not a POST! If you see this, push events is configured correctly.';
 }
 
 setTimeout(function(){
