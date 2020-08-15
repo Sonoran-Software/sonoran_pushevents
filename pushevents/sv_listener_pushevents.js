@@ -49,7 +49,7 @@ if (req.method == 'POST') {
         if (body.key && body.key.toUpperCase() === config.apiKey.toUpperCase()) {
         // Ensure TYPE exists
         if (body.type) {
-            emit("SonoranCAD::core:writeLog", "debug", "Pushevents incoming: " + JSON.stringify(body.data));
+            emit("SonoranCAD::core:writeLog", "debug", "Pushevent " + body.type + " incoming: " + JSON.stringify(body.data));
             // Check data fields per request type
             switch (body.type.toUpperCase()) {
             case 'EVENT_UNIT_STATUS':
@@ -120,8 +120,8 @@ if (req.method == 'POST') {
                 response = 'Success!';
                 break;
             case 'EVENT_911':
-                if (body.callId != undefined) {
-                    emit('SonoranCAD::pushevents:IncomingCadCall', body.data);
+                if (body.data.call.callId != undefined) {
+                    emit('SonoranCAD::pushevents:IncomingCadCall', body.data.call);
                 }
                 response = 'Success!';
                 break;
