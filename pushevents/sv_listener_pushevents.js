@@ -121,7 +121,7 @@ if (req.method == 'POST') {
                 break;
             case 'EVENT_911':
                 if (body.data.call.callId != undefined) {
-                    emit('SonoranCAD::pushevents:IncomingCadCall', body.data.call);
+                    emit('SonoranCAD::pushevents:IncomingCadCall', body.data.call, body.data.apiIds);
                 }
                 response = 'Success!';
                 break;
