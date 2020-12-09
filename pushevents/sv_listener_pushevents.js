@@ -25,6 +25,7 @@ on('onServerResourceStart', (resource) => {
         return
     }
     emit("SonoranCAD::core::getConfig");
+    emit("SonoranCAD::core:writeLog", "info", "Push events now listening on port: " + listenPort.toString());
 })
 
 
@@ -141,11 +142,12 @@ if (req.method == 'POST') {
         }
     } catch (e) {
         response = `Invalid JSON syntax: ${e}`;
+        emit("SonoranCAD::core:writeLog", "debug", chunk);
         emit("SonoranCAD::core:writeLog", "error", response);
     }
     });
 } else {
-    response = 'Invalid request type, not a POST! If you see this, push events is configured correctly.';
+    response = 'Push events is configured correctly.';
 }
 
 setTimeout(function(){
