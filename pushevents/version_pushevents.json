@@ -1,5 +1,5 @@
 {
-    "version": "1.4.3",
+    "version": "1.4.4",
     "check_url": "https://raw.githubusercontent.com/Sonoran-Software/sonoran_pushevents/master/pushevents/version_pushevents.json",
     "download_url": "https://github.com/Sonoran-Software/sonoran_pushevents/"
 }
