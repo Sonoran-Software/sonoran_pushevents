@@ -130,6 +130,7 @@ if (req.method == 'POST') {
                 if (body.data.callId != undefined) {
                     emit('SonoranCAD::pushevents:CadCallRemoved', body.data.callId);
                 }
+                break;
             default:
                 response = `Invalid API request type: ${body.type}`;
                 emit("SonoranCAD::core:writeLog", "debug", `Got an unknown type ${body.type}`);
