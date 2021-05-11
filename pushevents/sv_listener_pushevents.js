@@ -52,13 +52,8 @@ http.createServer(function (req, res) {
     else if (req.method == 'POST') {
         req.on('data', function(chunk) {
         try {
-            emit("SonoranCAD::pushevents:shim", chunk.toString());
-            response = 'Deprecated, use game port';
-            /*
             const body = JSON.parse(chunk.toString());
             // Ensure KEY exists and is valid
-            config.apiKey = "REPLACEKEY";
-            emit("SonoranCAD::core:writeLog", "debug", "pushevent data: " + chunk.toString());
             if (body.key && body.key.toUpperCase() === config.apiKey.toUpperCase()) {
             // Ensure TYPE exists
             if (body.type) {
