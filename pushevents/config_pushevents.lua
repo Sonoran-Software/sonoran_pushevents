@@ -7,7 +7,7 @@
 ]]
 
 local config = {
-    enabled = false
+    enabled = true
 }
 
---Config.RegisterPluginConfig("pushevents", config)
+Config.RegisterPluginConfig("pushevents", config)
