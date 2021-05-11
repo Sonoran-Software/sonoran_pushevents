@@ -16,6 +16,14 @@ You should have received a copy of the GNU General Public License
 along with this program in the file "LICENSE".  If not, see <http://www.gnu.org/licenses/>.
 */
 
+on('onServerResourceStart', (resource) => {
+    if (GetCurrentResourceName() != resource) {
+        return
+    }
+    emit("SonoranCAD::core:writeLog", "warn", "The pushevents plugin is now unused. Please remove it.");
+})
+
+/*
 let config = null;
 const listenPort = GetConvarInt('SonoranListenPort', 3232);
 var http = require('http');
@@ -27,16 +35,12 @@ on('onServerResourceStart', (resource) => {
     emit("SonoranCAD::core::getConfig");
 })
 
-
-
 on("SonoranCAD::core:configData", function(data) {
     if (data != null) {
         config = JSON.parse(data);
     }
     emit("SonoranCAD::core:writeLog", "info", "Push events now listening on port: " + listenPort.toString());
 });
-
-
 
 http.createServer(function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -163,3 +167,5 @@ http.createServer(function (req, res) {
         res.end();
     }, 0);
 }).listen(listenPort);
+
+*/
