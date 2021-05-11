@@ -16,14 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program in the file "LICENSE".  If not, see <http://www.gnu.org/licenses/>.
 */
 
-on('onServerResourceStart', (resource) => {
-    if (GetCurrentResourceName() != resource) {
-        return
-    }
-    emit("SonoranCAD::core:writeLog", "warn", "The pushevents plugin is now unused. Please remove it.");
-})
-
-/*
 let config = null;
 const listenPort = GetConvarInt('SonoranListenPort', 3232);
 var http = require('http');
@@ -156,7 +148,7 @@ http.createServer(function (req, res) {
             } else {
             response = 'Invalid API Key!';
             emit("SonoranCAD::core:writeLog", "error", response);
-            }
+            }*/
         } catch (e) {
             response = `[pushevents] Invalid JSON syntax: ${e}. Enable debug mode to investigate.`;
             emit("SonoranCAD::core:writeLog", "debug", chunk);
@@ -172,5 +164,3 @@ http.createServer(function (req, res) {
         res.end();
     }, 0);
 }).listen(listenPort);
-
-*/
